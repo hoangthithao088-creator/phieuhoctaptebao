@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phiếu học tập Sinh học 6 - Bài 19</title>
+<style>
+:root{
+  --bg:#f5f7ff; --card:#fff; --blue:#2f80ed; --cyan:#56ccf2;
+  --purple:#7357e8; --violet:#9b6cf6; --ink:#22314b; --muted:#66758c;
+  --line:#dfe5f2; --good:#20945f; --bad:#d94b4b; --soft:#f7f4ff;
+  --shadow:0 12px 32px rgba(69,78,145,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 0%,rgba(86,204,242,.18),transparent 25%),
+    radial-gradient(circle at 100% 8%,rgba(115,87,232,.16),transparent 28%),var(--bg);
+}
+button,input{font:inherit}
+.page{max-width:980px;margin:auto;padding:18px}
+.hero{
+  padding:26px 22px;border-radius:28px;color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--purple),var(--blue));box-shadow:var(--shadow)
+}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:#ffffff18}
+.hero:before{width:190px;height:190px;right:-65px;top:-75px}
+.hero:after{width:115px;height:115px;left:-25px;bottom:-55px}
+.kicker{font-size:.86rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+h1{margin:.35rem 0 .5rem;font-size:clamp(1.75rem,5vw,2.8rem);line-height:1.08}
+.hero p{max-width:760px;margin:0;opacity:.95}
+.pill{display:inline-block;margin-top:14px;padding:8px 12px;border-radius:999px;background:#ffffff22;font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.card{
+  background:var(--card);border:1px solid #7757e818;border-radius:22px;padding:18px;box-shadow:var(--shadow)
+}
+.full{grid-column:1/-1}
+.title{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:1.16rem;color:#4f43b8}
+.icon{width:35px;height:35px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--purple),var(--blue))}
+.student{display:grid;grid-template-columns:1.5fr .8fr 1fr;gap:12px}
+label{font-weight:800;font-size:.93rem}
+input[type=text],input[type=date]{
+  width:100%;margin-top:6px;padding:11px 12px;border:1.5px solid var(--line);border-radius:13px;background:#fbfcff;outline:none;color:var(--ink)
+}
+input:focus{border-color:var(--purple);box-shadow:0 0 0 3px #7357e818}
+.obj{display:flex;gap:10px;padding:10px 12px;border-radius:14px;background:var(--soft);margin-top:8px}
+.obj b{color:var(--purple)}
+.q{padding:14px 0;border-top:1px dashed var(--line)}
+.q:first-of-type{padding-top:0;border-top:0}
+.qtitle{font-weight:900;margin-bottom:10px}
+.options{display:grid;gap:8px}
+.opt{
+ display:flex;gap:9px;align-items:flex-start;padding:10px 11px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:#fff
+}
+.opt:hover{border-color:#b6adff;background:#fbfaff}
+.opt input{margin-top:3px}
+.tf{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center}
+.tf > div{padding:8px;border-bottom:1px solid #edf0f6}
+.tf .head{font-weight:900;color:var(--muted)}
+.blank{
+  display:inline-block;min-width:135px;padding:5px 8px;border:0;border-bottom:2px solid #8e80ef;border-radius:0;background:#faf9ff
+}
+.wordbank{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.wordbank span{padding:7px 10px;background:#edf3ff;border:1px solid #cddcff;border-radius:999px;font-weight:800;color:#3561b3}
+.match-row{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;align-items:center;margin:9px 0}
+.match-row select{width:100%;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:#fff}
+
+/* Drag & Drop */
+.dd-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}
+.bank,.zones{border-radius:18px;padding:14px;background:#f8f9ff;border:1px solid #e1e5f3}
+.bank h3,.zones h3{margin:0 0 12px;color:#5146b9}
+.drag-list{display:grid;gap:10px}
+.drag{
+  user-select:none;touch-action:none;cursor:grab;padding:12px;border-radius:14px;
+  border:1.5px solid #cfd7ee;background:#fff;font-weight:850;box-shadow:0 5px 14px #59649f14;
+  display:flex;align-items:center;gap:10px
+}
+.drag:active{cursor:grabbing}
+.drag .mini{
+  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#dff5ff,#eee7ff);font-size:1.25rem
+}
+.dropzone{
+  min-height:66px;border:2px dashed #a9afe0;border-radius:16px;margin:10px 0;padding:10px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff
+}
+.dropzone.over{border-color:var(--purple);background:#f8f5ff}
+.zone-label{font-weight:900}
+.slot{min-width:150px;min-height:42px;border-radius:11px;background:#f3f5fb;display:grid;place-items:center;color:#8090a7;font-size:.9rem;padding:6px;text-align:center}
+.dropzone.correct{border-style:solid;border-color:#67c896;background:#f3fff8}
+.dropzone.correct .slot{background:#eaf9f0;color:#167247;font-weight:900}
+.success{
+  display:none;margin-top:13px;padding:12px 14px;border-radius:14px;background:#eaf9f0;color:#167247;font-weight:900;text-align:center
+}
+.success.show{display:block;animation:pop .35s ease-out}
+@keyframes pop{0%{transform:scale(.92);opacity:0}100%{transform:scale(1);opacity:1}}
+.shake{animation:shake .28s linear}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+.remember{background:linear-gradient(135deg,#f7f4ff,#eef8ff)}
+.remember ul{margin:0;padding-left:20px}
+.remember li{margin:8px 0}
+.actions{position:sticky;bottom:12px;z-index:5;display:flex;gap:10px;justify-content:center;margin:20px 0 8px}
+.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:900;cursor:pointer;box-shadow:0 7px 18px #40509520}
+.primary{color:#fff;background:linear-gradient(135deg,var(--purple),var(--blue))}
+.secondary{background:#fff;color:#4e43b6;border:1px solid #d4d5ee}
+.scorebox{display:none;margin-top:14px;padding:14px;border-radius:15px;background:#f3f8ff;border:1px solid #d6e5ff;font-weight:800}
+.footer{text-align:center;color:var(--muted);font-size:.85rem;padding:8px 0 28px}
+@media(max-width:740px){
+  .page{padding:10px}
+  .grid,.student,.dd-wrap{grid-template-columns:1fr}
+  .hero{border-radius:22px;padding:21px 17px}
+  .card{border-radius:18px;padding:15px}
+  .match-row{grid-template-columns:1fr}
+  .slot{min-width:120px}
+  .actions{flex-direction:column}
+  .btn{width:100%}
+}
+@media print{
+  body{background:#fff}.actions{display:none}.page{max-width:none}.card,.hero{box-shadow:none}
+}
+
+.answer-correct{border-color:#20945f!important;background:#effaf4!important;color:#14653f!important}
+.answer-wrong{border-color:#d94b4b!important;background:#fff1f1!important;color:#9b2f2f!important}
+.locked-answer{pointer-events:none;opacity:.92}
+.submit-note{margin-top:10px;font-size:.92rem;color:var(--muted)}
+.image-uploader{margin-top:14px;padding:14px;border:1.5px dashed #b7bce3;border-radius:16px;background:#fbfbff}
+.image-uploader input[type=file]{width:100%;padding:9px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.upload-preview{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.upload-card{width:110px;padding:8px;border:1px solid #d9def1;border-radius:14px;background:#fff;box-shadow:0 5px 14px #59649f14;text-align:center}
+.upload-card img{width:100%;height:78px;object-fit:cover;border-radius:10px;display:block}
+.upload-card .cap{font-size:.8rem;margin-top:6px;word-break:break-word}
+.image-dropzone{min-height:120px;align-items:center}
+.image-dropzone .slot{min-height:82px}
+.image-dropzone img{max-width:100%;max-height:95px;object-fit:contain;border-radius:10px}
+.badge-correct{display:inline-block;margin-left:8px;padding:3px 7px;border-radius:999px;background:#e7f8ef;color:#167247;font-size:.8rem;font-weight:900}
+.badge-wrong{display:inline-block;margin-left:8px;padding:3px 7px;border-radius:999px;background:#ffecec;color:#a33a3a;font-size:.8rem;font-weight:900}
+
+
+.video-box{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+.video-panel,.video-questions{border:1px solid #e1e5f3;border-radius:18px;padding:14px;background:#fafbff}
+.video-panel h3,.video-questions h3{margin:0 0 12px;color:#5146b9}
+.video-input{width:100%;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.video-player-wrap{margin-top:12px;border-radius:16px;overflow:hidden;background:#111;min-height:220px;display:grid;place-items:center}
+.video-player-wrap video{width:100%;max-height:430px;background:#000;display:none}
+.video-placeholder{color:#e7e7ef;text-align:center;padding:28px;font-weight:800}
+.video-q{margin:12px 0;padding:12px;border-radius:14px;background:#fff;border:1px solid #e5e8f3}
+.video-q p{margin:0 0 8px}
+.video-blank{width:100%;padding:10px 12px;border:1.5px solid #cfd7ee;border-radius:12px;background:#fbfcff}
+.video-blank.answer-correct{border-color:#20945f!important;background:#effaf4!important}
+.video-blank.answer-wrong{border-color:#d94b4b!important;background:#fff1f1!important}
+.video-tip{margin-top:10px;font-size:.9rem;color:var(--muted)}
+@media(max-width:740px){.video-box{grid-template-columns:1fr}}
+
+
+.admin-trigger{
+  position:fixed;right:14px;top:14px;z-index:20;border:0;border-radius:14px;
+  padding:10px 13px;font-weight:900;cursor:pointer;color:#fff;
+  background:linear-gradient(135deg,#5e4bd8,#2f80ed);box-shadow:0 8px 22px #40509530
+}
+.modal-backdrop{
+  position:fixed;inset:0;background:#18213d88;display:none;align-items:center;justify-content:center;
+  z-index:100;padding:16px
+}
+.modal-backdrop.show{display:flex}
+.admin-modal{
+  width:min(920px,96vw);max-height:92vh;overflow:auto;background:#fff;border-radius:24px;
+  padding:20px;box-shadow:0 24px 70px #111a3c55
+}
+.admin-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}
+.admin-head h2{margin:0;color:#4f43b8}
+.close-btn{border:0;border-radius:10px;padding:8px 11px;background:#f0f2f8;cursor:pointer;font-weight:900}
+.admin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.admin-field{background:#f8f9ff;border:1px solid #e3e6f2;border-radius:16px;padding:12px}
+.admin-field label{display:block;margin-bottom:6px}
+.admin-field input,.admin-field select{
+  width:100%;padding:10px;border:1px solid #cfd6e8;border-radius:11px;background:#fff
+}
+.admin-table{width:100%;border-collapse:collapse;margin-top:12px}
+.admin-table th,.admin-table td{border:1px solid #e3e6f2;padding:9px;text-align:left}
+.admin-table th{background:#f4f2ff;color:#4f43b8}
+.admin-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.lesson-materials{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px
+}
+.material-card{
+  border:1px solid #dfe4f1;border-radius:18px;padding:14px;background:#fbfcff
+}
+.material-preview{
+  margin-top:12px;min-height:140px;border:1.5px dashed #b9c0dc;border-radius:14px;
+  background:#fff;display:grid;place-items:center;padding:10px;overflow:hidden
+}
+.material-preview img{max-width:100%;max-height:420px;border-radius:12px}
+.material-preview iframe{width:100%;height:420px;border:0;border-radius:12px;background:#fff}
+.material-preview .filename{font-weight:850;color:#4f43b8;word-break:break-word;text-align:center}
+.material-preview .hint{color:#7c879a;text-align:center}
+.hidden{display:none!important}
+@media(max-width:740px){
+  .admin-grid,.lesson-materials{grid-template-columns:1fr}
+  .admin-trigger{top:auto;bottom:14px}
+}
+
+
+.diagram-wrap{display:grid;grid-template-columns:1.2fr .9fr;gap:18px;align-items:start}
+.diagram-stage{position:relative;width:100%;background:#fff;border:1px solid #dfe5f2;border-radius:18px;overflow:hidden}
+.diagram-stage img{width:100%;display:block}
+.diagram-mask{position:absolute;background:rgba(255,255,255,.98);border-radius:18px;box-shadow:0 1px 0 #e9ecf6 inset,0 1px 4px rgba(0,0,0,.04)}
+.diagram-pin{
+  position:absolute;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,#6a57e9,#2f80ed);color:#fff;font-weight:900;
+  box-shadow:0 6px 16px rgba(64,80,149,.28);border:2px solid #fff
+}
+.diagram-side{background:#fbfcff;border:1px solid #dfe5f2;border-radius:18px;padding:14px}
+.diagram-side h3{margin:0 0 10px;color:#5146b9}
+.diagram-grid{display:grid;gap:10px}
+.diagram-row{display:grid;grid-template-columns:46px 1fr;gap:10px;align-items:center}
+.diagram-num{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+  background:#eef2ff;color:#4f43b8;font-weight:900;border:1px solid #d5ddff
+}
+.diagram-answer{
+  width:100%;padding:10px 12px;border:1.5px solid #cfd7ee;border-radius:12px;background:#fff
+}
+.diagram-tip{margin-top:10px;color:var(--muted);font-size:.92rem}
+@media(max-width:740px){.diagram-wrap{grid-template-columns:1fr}}
+
+
+/* ===== Mobile touch support for drag & drop ===== */
+.drag, .image-drag{
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+  touch-action:none;
+}
+.touch-ghost{
+  position:fixed!important;
+  z-index:99999!important;
+  pointer-events:none!important;
+  opacity:.94!important;
+  transform:scale(.96);
+  box-shadow:0 12px 28px rgba(37,50,90,.28)!important;
+}
+.dropzone.touch-over{
+  border-color:var(--purple)!important;
+  background:#f5f1ff!important;
+  box-shadow:0 0 0 4px rgba(115,87,232,.10);
+}
+@media(max-width:740px){
+  .drag{padding:14px;min-height:58px}
+  .dropzone{min-height:76px}
+  .slot{min-height:48px}
+}
+
+
+.sheet-status{
+  margin-top:10px;padding:10px 12px;border-radius:12px;font-weight:800;display:none
+}
+.sheet-status.sending{display:block;background:#fff8e8;color:#8a6500;border:1px solid #f0d790}
+.sheet-status.success{display:block;background:#eaf9f0;color:#167247;border:1px solid #a9dfc0}
+.sheet-status.error{display:block;background:#fff1f1;color:#a33a3a;border:1px solid #efb9b9}
+
+</style>
+</head>
+<body>
+<button class="admin-trigger" onclick="openAdminLogin()">⚙️ Quản trị</button>
+<main class="page">
+  <header class="hero">
+    <div class="kicker">PHIẾU HỌC TẬP • SINH HỌC 6</div>
+    <h1>BÀI 19: CẤU TẠO VÀ CHỨC NĂNG CÁC THÀNH PHẦN CỦA TẾ BÀO</h1>
+    <p>Khám phá những bộ phận quan trọng của tế bào và chức năng của chúng.</p>
+    <div class="pill">🧬 Học – tương tác – kiểm tra ngay trên trình duyệt</div>
+  </header>
+
+  <section class="grid">
+    <div class="card full">
+      <h2 class="title"><span class="icon">👤</span> Thông tin học sinh</h2>
+      <div class="student">
+        <label>Họ và tên<input id="studentName" type="text" placeholder="Nhập họ tên" autocomplete="name"></label>
+        <label>Lớp<input id="studentClass" type="text" placeholder="6..." autocomplete="off"></label>
+        <label>Ngày học<input type="date"></label>
+      </div>
+    </div>
+
+
+    <div class="card full" id="lessonContentCard">
+      <h2 class="title"><span class="icon">📚</span> Nội dung bài học</h2>
+      <p id="lessonDescription">Giáo viên có thể đưa tài liệu bài học từ bên ngoài vào dưới dạng <b>file</b> hoặc <b>hình ảnh</b>. Học sinh xem trực tiếp trước khi làm bài.</p>
+
+      <div class="lesson-materials">
+        <div class="material-card">
+          <h3 style="margin-top:0;color:#5146b9">🖼️ Hình ảnh bài học</h3>
+          <input id="lessonImageInput" class="video-input" type="file" accept="image/*">
+          <div id="lessonImagePreview" class="material-preview">
+            <div class="hint">Chưa có hình ảnh bài học</div>
+          </div>
+        </div>
+
+        <div class="material-card">
+          <h3 style="margin-top:0;color:#5146b9">📄 File bài học</h3>
+          <input id="lessonFileInput" class="video-input" type="file" accept=".pdf,.txt,.doc,.docx,.ppt,.pptx,.html,.htm">
+          <div id="lessonFilePreview" class="material-preview">
+            <div class="hint">Chưa có file bài học</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="title"><span class="icon">🎯</span> I. Mục tiêu bài học</h2>
+      <div class="obj"><b>✓</b><span>Trình bày được cấu tạo và chức năng các thành phần chính của tế bào.</span></div>
+      <div class="obj"><b>✓</b><span>Phân biệt được tế bào nhân sơ và tế bào nhân thực.</span></div>
+      <div class="obj"><b>✓</b><span>Phân biệt được tế bào động vật và tế bào thực vật.</span></div>
+    </div>
+
+    <div class="card">
+      <h2 class="title"><span class="icon">🔎</span> II. Trắc nghiệm</h2>
+
+      <div class="q" data-correct="C">
+        <div class="qtitle">1. Thành phần nào có ở mọi tế bào và bao bọc tế bào chất?</div>
+        <div class="options">
+          <label class="opt"><input type="radio" name="mc1" value="A"> A. Nhân tế bào</label>
+          <label class="opt"><input type="radio" name="mc1" value="B"> B. Không bào</label>
+          <label class="opt"><input type="radio" name="mc1" value="C"> C. Màng tế bào</label>
+          <label class="opt"><input type="radio" name="mc1" value="D"> D. Lục lạp</label>
+        </div>
+      </div>
+
+      <div class="q" data-correct="B">
+        <div class="qtitle">2. Phần lớn các hoạt động trao đổi chất của tế bào diễn ra ở đâu?</div>
+        <div class="options">
+          <label class="opt"><input type="radio" name="mc2" value="A"> A. Màng tế bào</label>
+          <label class="opt"><input type="radio" name="mc2" value="B"> B. Tế bào chất</label>
+          <label class="opt"><input type="radio" name="mc2" value="C"> C. Thành tế bào</label>
+          <label class="opt"><input type="radio" name="mc2" value="D"> D. Không bào</label>
+        </div>
+      </div>
+
+      <div class="q" data-correct="C">
+        <div class="qtitle">3. Nơi chứa vật chất di truyền và điều khiển hoạt động sống của tế bào nhân thực là:</div>
+        <div class="options">
+          <label class="opt"><input type="radio" name="mc3" value="A"> A. Tế bào chất</label>
+          <label class="opt"><input type="radio" name="mc3" value="B"> B. Màng tế bào</label>
+          <label class="opt"><input type="radio" name="mc3" value="C"> C. Nhân</label>
+          <label class="opt"><input type="radio" name="mc3" value="D"> D. Lục lạp</label>
+        </div>
+      </div>
+
+      <div class="q" data-correct="B">
+        <div class="qtitle">4. Bào quan giúp tế bào thực vật quang hợp là:</div>
+        <div class="options">
+          <label class="opt"><input type="radio" name="mc4" value="A"> A. Ribosome</label>
+          <label class="opt"><input type="radio" name="mc4" value="B"> B. Lục lạp</label>
+          <label class="opt"><input type="radio" name="mc4" value="C"> C. Nhân</label>
+          <label class="opt"><input type="radio" name="mc4" value="D"> D. Màng tế bào</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="title"><span class="icon">✅</span> III. Đúng – Sai</h2>
+      <div class="tf">
+        <div class="head">Phát biểu</div><div class="head">Đ</div><div class="head">S</div>
+
+        <div>Màng tế bào tham gia trao đổi chất giữa tế bào và môi trường.</div>
+        <input type="radio" name="tf1" value="T" data-correct="T"><input type="radio" name="tf1" value="F">
+
+        <div>Tế bào nhân sơ có màng nhân hoàn chỉnh.</div>
+        <input type="radio" name="tf2" value="T"><input type="radio" name="tf2" value="F" data-correct="F">
+
+        <div>Tế bào động vật và tế bào thực vật đều là tế bào nhân thực.</div>
+        <input type="radio" name="tf3" value="T" data-correct="T"><input type="radio" name="tf3" value="F">
+
+        <div>Lục lạp là thành phần đặc trưng giúp tế bào thực vật quang hợp.</div>
+        <input type="radio" name="tf4" value="T" data-correct="T"><input type="radio" name="tf4" value="F">
+
+        <div>Tất cả tế bào đều có nhân hoàn chỉnh.</div>
+        <input type="radio" name="tf5" value="T"><input type="radio" name="tf5" value="F" data-correct="F">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="title"><span class="icon">✍️</span> IV. Điền khuyết</h2>
+      <div class="wordbank">
+        <span>màng tế bào</span><span>tế bào chất</span><span>nhân</span>
+        <span>vùng nhân</span><span>lục lạp</span>
+      </div>
+      <p>1. <input class="blank" data-answer="màng tế bào"> bao bọc tế bào chất và tham gia trao đổi chất với môi trường.</p>
+      <p>2. <input class="blank" data-answer="tế bào chất"> là nơi diễn ra phần lớn các hoạt động trao đổi chất.</p>
+      <p>3. Ở tế bào nhân sơ, vật chất di truyền nằm trong <input class="blank" data-answer="vùng nhân">.</p>
+      <p>4. <input class="blank" data-answer="nhân"> là trung tâm điều khiển hoạt động sống ở tế bào nhân thực.</p>
+      <p>5. <input class="blank" data-answer="lục lạp"> chứa diệp lục và giúp tế bào thực vật quang hợp.</p>
+    </div>
+
+    <div class="card">
+      <h2 class="title"><span class="icon">🔗</span> V. Nối cột</h2>
+      <p><b>Chọn chức năng phù hợp cho từng thành phần.</b></p>
+      <div class="match-row"><b>1. Màng tế bào</b><select data-answer="d"><option value="">-- Chọn --</option><option value="a">a. Chứa vật chất di truyền, điều khiển hoạt động</option><option value="b">b. Giúp tế bào thực vật quang hợp</option><option value="c">c. Quy định hình dạng và bảo vệ tế bào</option><option value="d">d. Tham gia trao đổi chất với môi trường</option><option value="e">e. Nơi diễn ra phần lớn hoạt động trao đổi chất</option><option value="f">f. Chứa nước, chất hòa tan, chất thải...</option></select></div>
+      <div class="match-row"><b>2. Tế bào chất</b><select data-answer="e"><option value="">-- Chọn --</option><option value="a">a. Chứa vật chất di truyền, điều khiển hoạt động</option><option value="b">b. Giúp tế bào thực vật quang hợp</option><option value="c">c. Quy định hình dạng và bảo vệ tế bào</option><option value="d">d. Tham gia trao đổi chất với môi trường</option><option value="e">e. Nơi diễn ra phần lớn hoạt động trao đổi chất</option><option value="f">f. Chứa nước, chất hòa tan, chất thải...</option></select></div>
+      <div class="match-row"><b>3. Nhân</b><select data-answer="a"><option value="">-- Chọn --</option><option value="a">a. Chứa vật chất di truyền, điều khiển hoạt động</option><option value="b">b. Giúp tế bào thực vật quang hợp</option><option value="c">c. Quy định hình dạng và bảo vệ tế bào</option><option value="d">d. Tham gia trao đổi chất với môi trường</option><option value="e">e. Nơi diễn ra phần lớn hoạt động trao đổi chất</option><option value="f">f. Chứa nước, chất hòa tan, chất thải...</option></select></div>
+      <div class="match-row"><b>4. Lục lạp</b><select data-answer="b"><option value="">-- Chọn --</option><option value="a">a. Chứa vật chất di truyền, điều khiển hoạt động</option><option value="b">b. Giúp tế bào thực vật quang hợp</option><option value="c">c. Quy định hình dạng và bảo vệ tế bào</option><option value="d">d. Tham gia trao đổi chất với môi trường</option><option value="e">e. Nơi diễn ra phần lớn hoạt động trao đổi chất</option><option value="f">f. Chứa nước, chất hòa tan, chất thải...</option></select></div>
+      <div class="match-row"><b>5. Thành tế bào</b><select data-answer="c"><option value="">-- Chọn --</option><option value="a">a. Chứa vật chất di truyền, điều khiển hoạt động</option><option value="b">b. Giúp tế bào thực vật quang hợp</option><option value="c">c. Quy định hình dạng và bảo vệ tế bào</option><option value="d">d. Tham gia trao đổi chất với môi trường</option><option value="e">e. Nơi diễn ra phần lớn hoạt động trao đổi chất</option><option value="f">f. Chứa nước, chất hòa tan, chất thải...</option></select></div>
+      <div class="match-row"><b>6. Không bào</b><select data-answer="f"><option value="">-- Chọn --</option><option value="a">a. Chứa vật chất di truyền, điều khiển hoạt động</option><option value="b">b. Giúp tế bào thực vật quang hợp</option><option value="c">c. Quy định hình dạng và bảo vệ tế bào</option><option value="d">d. Tham gia trao đổi chất với môi trường</option><option value="e">e. Nơi diễn ra phần lớn hoạt động trao đổi chất</option><option value="f">f. Chứa nước, chất hòa tan, chất thải...</option></select></div>
+    </div>
+
+    <div class="card full">
+      <h2 class="title"><span class="icon">🧩</span> VI. Kéo – thả vào đúng vị trí</h2>
+      <p>Hãy kéo từng khái niệm ở bên trái vào đúng mô tả bên phải. <b>Thả đúng sẽ khóa đáp án và hiện “Chính xác! 🎉”. Thả sai, thẻ sẽ tự quay về vị trí ban đầu.</b></p>
+
+      <div class="dd-wrap">
+        <div class="bank">
+          <h3>📦 Kho khái niệm</h3>
+          <div class="drag-list" id="dragBank">
+            <div class="drag" draggable="true" id="d1" data-key="membrane"><span class="mini">🛡️</span>Màng tế bào</div>
+            <div class="drag" draggable="true" id="d2" data-key="cytoplasm"><span class="mini">💧</span>Tế bào chất</div>
+            <div class="drag" draggable="true" id="d3" data-key="nucleus"><span class="mini">🧠</span>Nhân</div>
+            <div class="drag" draggable="true" id="d4" data-key="chloroplast"><span class="mini">🌿</span>Lục lạp</div>
+            <div class="drag" draggable="true" id="d5" data-key="wall"><span class="mini">🧱</span>Thành tế bào</div>
+          </div>
+        </div>
+
+        <div class="zones">
+          <h3>🎯 Vị trí cần ghép</h3>
+
+          <div class="dropzone" data-accept="nucleus">
+            <div class="zone-label">Chứa vật chất di truyền, điều khiển hoạt động sống</div>
+            <div class="slot">Thả vào đây</div>
+          </div>
+
+          <div class="dropzone" data-accept="chloroplast">
+            <div class="zone-label">Chứa diệp lục, giúp tế bào thực vật quang hợp</div>
+            <div class="slot">Thả vào đây</div>
+          </div>
+
+          <div class="dropzone" data-accept="wall">
+            <div class="zone-label">Bao ngoài màng tế bào, giúp bảo vệ và quy định hình dạng</div>
+            <div class="slot">Thả vào đây</div>
+          </div>
+
+          <div class="dropzone" data-accept="membrane">
+            <div class="zone-label">Bao bọc tế bào chất và tham gia trao đổi chất với môi trường</div>
+            <div class="slot">Thả vào đây</div>
+          </div>
+
+          <div class="dropzone" data-accept="cytoplasm">
+            <div class="zone-label">Nơi diễn ra phần lớn hoạt động trao đổi chất</div>
+            <div class="slot">Thả vào đây</div>
+          </div>
+
+          <div id="dragSuccess" class="success">Chính xác! 🎉 Em đã ghép đúng tất cả các thành phần.</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card full">
+      <h2 class="title"><span class="icon">🖼️</span> VII. Kéo – thả bằng hình ảnh từ bên ngoài</h2>
+      <p>Em có thể chọn hình ảnh từ máy tính/điện thoại rồi kéo hình vào đúng ô. Ảnh được xử lý ngay trong trình duyệt, không cần tải lên máy chủ.</p>
+
+      <div class="image-uploader">
+        <label><b>1. Chọn ảnh từ thiết bị:</b></label>
+        <input id="imageInput" type="file" accept="image/*" multiple>
+        <div class="submit-note">Mẹo: chọn 1–5 ảnh. Sau khi ảnh xuất hiện, kéo từng ảnh vào ô phù hợp.</div>
+        <div id="uploadPreview" class="upload-preview"></div>
+      </div>
+
+      <div class="dd-wrap" style="margin-top:16px">
+        <div class="bank">
+          <h3>📁 Ảnh đã chọn</h3>
+          <div id="imageBank" class="drag-list"></div>
+        </div>
+
+        <div class="zones">
+          <h3>🎯 Ô kéo thả hình ảnh</h3>
+
+          <div class="dropzone image-dropzone" data-image-zone="plant">
+            <div class="zone-label">Hình tế bào thực vật</div>
+            <div class="slot">Thả ảnh phù hợp vào đây</div>
+          </div>
+
+          <div class="dropzone image-dropzone" data-image-zone="animal">
+            <div class="zone-label">Hình tế bào động vật</div>
+            <div class="slot">Thả ảnh phù hợp vào đây</div>
+          </div>
+
+          <div class="dropzone image-dropzone" data-image-zone="prokaryote">
+            <div class="zone-label">Hình tế bào nhân sơ / vi khuẩn</div>
+            <div class="slot">Thả ảnh phù hợp vào đây</div>
+          </div>
+
+          <div id="imageDropMsg" class="success">Đã đặt ảnh vào ô. Giáo viên có thể quy ước tên file để hệ thống tự kiểm tra.</div>
+        </div>
+      </div>
+
+      <div class="image-uploader">
+        <b>2. Cách tự kiểm tra ảnh:</b>
+        <p style="margin-bottom:0">Để hệ thống nhận đúng/sai tự động, đặt tên file ảnh có chứa một trong các từ khóa:
+        <b>plant</b> hoặc <b>thucvat</b>; <b>animal</b> hoặc <b>dongvat</b>; <b>prokaryote</b>, <b>nhanso</b> hoặc <b>vikhuan</b>.
+        Nếu tên file không có từ khóa, ảnh vẫn kéo thả được nhưng không tự chấm.</p>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="title"><span class="icon">🧫</span> VIII. Bài tập chú thích hình</h2>
+      <p>Giáo viên hoặc học sinh có thể <b>đưa hình ảnh từ bên ngoài vào</b> để làm bài chú thích. Hình được mở trực tiếp trong trình duyệt, không cần tải lên Internet.</p>
+
+      <div class="diagram-wrap">
+        <div class="diagram-stage" style="padding:14px">
+          <label for="diagramImageInput"><b>🖼️ Chọn hình ảnh bài tập:</b></label>
+          <input id="diagramImageInput" class="video-input" type="file" accept="image/*">
+
+          <div id="diagramImageHolder" class="material-preview" style="margin-top:12px;min-height:320px">
+            <div class="hint">Chưa chọn hình ảnh.<br>Hãy chọn ảnh JPG, PNG, WEBP... từ máy tính hoặc điện thoại.</div>
+          </div>
+
+          <div class="diagram-tip">
+            Gợi ý: nên dùng hình có các mũi tên hoặc vị trí đánh số 1–9 để học sinh đối chiếu và chọn chú thích tương ứng.
+          </div>
+        </div>
+
+        <div class="diagram-side">
+          <h3>✍️ Chọn chú thích đúng</h3>
+          <div class="diagram-grid">
+            <div class="diagram-row"><div class="diagram-num">1</div><select class="diagram-answer" data-answer="thanh te bao">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">2</div><select class="diagram-answer" data-answer="mang sinh chat">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">3</div><select class="diagram-answer" data-answer="te bao chat">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">4</div><select class="diagram-answer" data-answer="khong bao lon">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">5</div><select class="diagram-answer" data-answer="nhan">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">6</div><select class="diagram-answer" data-answer="luoi noi chat">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">7</div><select class="diagram-answer" data-answer="bo may golgi">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">8</div><select class="diagram-answer" data-answer="ti the">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+
+            <div class="diagram-row"><div class="diagram-num">9</div><select class="diagram-answer" data-answer="luc lap">
+              <option value="">-- Chọn bộ phận --</option><option value="thanh te bao">Thành tế bào</option><option value="mang sinh chat">Màng sinh chất</option><option value="te bao chat">Tế bào chất</option><option value="khong bao lon">Không bào lớn</option><option value="nhan">Nhân</option><option value="luoi noi chat">Lưới nội chất</option><option value="bo may golgi">Bộ máy Golgi</option><option value="ti the">Ti thể</option><option value="luc lap">Lục lạp</option>
+            </select></div>
+          </div>
+
+          <div class="diagram-tip">
+            Khi bấm <b>Nộp bài</b>, đáp án đúng được tô xanh, đáp án sai tô đỏ và phần này được tính điểm tự động.
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="card full">
+      <h2 class="title"><span class="icon">🎬</span> IX. Xem video – hoàn thành câu hỏi điền khuyết</h2>
+      <p>Học sinh chọn một video có sẵn trong máy tính hoặc điện thoại, xem trực tiếp trên trình duyệt rồi hoàn thành các câu điền khuyết bên cạnh.</p>
+
+      <div class="video-box">
+        <div class="video-panel">
+          <h3>📹 Video học tập</h3>
+          <label for="videoInput"><b>Chọn video từ thiết bị:</b></label>
+          <input id="videoInput" class="video-input" type="file" accept="video/*">
+
+          <div class="video-player-wrap">
+            <video id="lessonVideo" controls playsinline preload="metadata"></video>
+            <div id="videoPlaceholder" class="video-placeholder">
+              Chưa chọn video.<br>
+              Hãy bấm “Chọn tệp” để đưa video từ bên ngoài vào.
+            </div>
+          </div>
+
+          <div class="video-tip">
+            Video chỉ được mở cục bộ trong trình duyệt. File HTML không tải video lên Internet.
+          </div>
+        </div>
+
+        <div class="video-questions">
+          <h3>✍️ Câu hỏi điền khuyết sau khi xem video</h3>
+
+          <div class="video-q">
+            <p><b>1.</b> Thành phần bao bọc tế bào chất và tham gia trao đổi chất với môi trường là:</p>
+            <input class="video-blank" data-answer="màng tế bào" placeholder="Nhập câu trả lời">
+          </div>
+
+          <div class="video-q">
+            <p><b>2.</b> Nơi diễn ra phần lớn các hoạt động trao đổi chất của tế bào là:</p>
+            <input class="video-blank" data-answer="tế bào chất" placeholder="Nhập câu trả lời">
+          </div>
+
+          <div class="video-q">
+            <p><b>3.</b> Ở tế bào nhân thực, bộ phận chứa vật chất di truyền và điều khiển hoạt động sống là:</p>
+            <input class="video-blank" data-answer="nhân" placeholder="Nhập câu trả lời">
+          </div>
+
+          <div class="video-q">
+            <p><b>4.</b> Bào quan chứa diệp lục, giúp tế bào thực vật quang hợp là:</p>
+            <input class="video-blank" data-answer="lục lạp" placeholder="Nhập câu trả lời">
+          </div>
+
+          <div class="video-q">
+            <p><b>5.</b> Tế bào nhân sơ chưa có ________ hoàn chỉnh.</p>
+            <input class="video-blank" data-answer="nhân" placeholder="Nhập từ còn thiếu">
+          </div>
+
+          <div class="video-tip">
+            Các câu này sẽ được tính điểm cùng với toàn bộ phiếu khi bấm <b>Nộp bài</b>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full remember">
+      <h2 class="title"><span class="icon">📘</span> X. Ghi nhớ</h2>
+      <ul>
+        <li>Tế bào có ba thành phần chính: <b>màng tế bào, tế bào chất và nhân (hoặc vùng nhân)</b>.</li>
+        <li><b>Màng tế bào</b> bao bọc tế bào chất và tham gia trao đổi chất giữa tế bào với môi trường.</li>
+        <li><b>Tế bào chất</b> là nơi diễn ra phần lớn các hoạt động trao đổi chất.</li>
+        <li><b>Nhân hoặc vùng nhân</b> chứa vật chất di truyền và tham gia điều khiển hoạt động sống của tế bào.</li>
+        <li>Tế bào nhân sơ chưa có nhân hoàn chỉnh; tế bào nhân thực có nhân hoàn chỉnh và các bào quan có màng bao bọc.</li>
+        <li>Tế bào thực vật có các đặc điểm nổi bật như <b>thành tế bào, lục lạp và không bào lớn</b>.</li>
+      </ul>
+    </div>
+
+    <div class="card full">
+      <h2 class="title"><span class="icon">🏁</span> Kiểm tra kết quả</h2>
+      <p>Bấm nút bên dưới để chấm các phần trắc nghiệm, đúng – sai, điền khuyết và nối cột.</p>
+      <div id="scorebox" class="scorebox"></div>
+      <div id="sheetStatus" class="sheet-status"></div>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="btn primary" id="submitBtn" onclick="submitQuiz()">📨 Nộp bài</button>
+    <button class="btn secondary" onclick="resetAll()">↻ Làm lại</button>
+    <button class="btn secondary" onclick="window.print()">🖨️ In phiếu</button>
+  </div>
+
+  <div class="footer">Phiếu học tập tương tác • Sinh học 6 • Bài 19</div>
+</main>
+
+<script>
+const norm = s => (s||"").trim().toLowerCase()
+  .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+  .replace(/đ/g,"d").replace(/\s+/g," ");
+
+
+function clearFeedback(){
+  document.querySelectorAll('.opt').forEach(x=>x.classList.remove('answer-correct','answer-wrong','locked-answer'));
+  document.querySelectorAll('.tf input').forEach(x=>x.parentElement?.classList?.remove('answer-correct','answer-wrong'));
+  document.querySelectorAll('.blank').forEach(x=>x.classList.remove('answer-correct','answer-wrong'));
+  document.querySelectorAll('.match-row select').forEach(x=>x.classList.remove('answer-correct','answer-wrong'));
+  document.querySelectorAll('.badge-correct,.badge-wrong').forEach(x=>x.remove());
+}
+
+const GOOGLE_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxlakdow2ZlCOHo1EkQ55Dc6XLR8yWQax_J2AsR8Tp3Rva36COMDOHCMK45nyzp5HGv/exec';
+
+async function guiKetQuaGoogleSheets(payload) {
+  const status = document.getElementById('sheetStatus');
+  status.className = 'sheet-status sending';
+  status.textContent = '⏳ Đang gửi kết quả lên Google Sheets...';
+
+  try {
+    await fetch(GOOGLE_SHEETS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // Với Apps Script gọi từ file HTML cục bộ, phản hồi thường là "opaque"
+    // khi dùng no-cors. Nếu fetch hoàn tất, coi như yêu cầu đã được gửi.
+    status.className = 'sheet-status success';
+    status.textContent = '✅ Đã gửi kết quả lên Google Sheets.';
+    return true;
+  } catch (error) {
+    console.error('Lỗi gửi Google Sheets:', error);
+    status.className = 'sheet-status error';
+    status.textContent = '⚠️ Chưa gửi được kết quả. Hãy kiểm tra Internet hoặc quyền triển khai Apps Script rồi thử lại.';
+    return false;
+  }
+}
+
+async function submitQuiz(){
+  clearFeedback();
+
+  const studentName = (document.getElementById('studentName')?.value || '').trim();
+  const studentClass = (document.getElementById('studentClass')?.value || '').trim();
+
+  if(!studentName){
+    alert('Vui lòng nhập Họ và tên trước khi nộp bài.');
+    document.getElementById('studentName')?.focus();
+    return;
+  }
+  if(!studentClass){
+    alert('Vui lòng nhập Lớp trước khi nộp bài.');
+    document.getElementById('studentClass')?.focus();
+    return;
+  }
+
+  let correct = 0;
+  let wrong = 0;
+  let unanswered = 0;
+  let total = 0;
+
+  // Trắc nghiệm
+  document.querySelectorAll('.q[data-correct]').forEach(q=>{
+    total++;
+    const chosen=q.querySelector('input[type=radio]:checked');
+    const right=q.querySelector(`input[type=radio][value="${q.dataset.correct}"]`);
+    q.querySelectorAll('.opt').forEach(opt=>opt.classList.add('locked-answer'));
+    if(right) right.closest('.opt').classList.add('answer-correct');
+
+    if(!chosen){
+      unanswered++;
+      const b=document.createElement('span'); b.className='badge-wrong'; b.textContent='Chưa làm';
+      q.querySelector('.qtitle').appendChild(b);
+    }else if(chosen.value===q.dataset.correct){
+      correct++;
+      const b=document.createElement('span'); b.className='badge-correct'; b.textContent='Đúng ✓';
+      q.querySelector('.qtitle').appendChild(b);
+    }else{
+      wrong++;
+      chosen.closest('.opt').classList.add('answer-wrong');
+      const b=document.createElement('span'); b.className='badge-wrong'; b.textContent='Sai ✗';
+      q.querySelector('.qtitle').appendChild(b);
+    }
+  });
+
+  // Đúng / Sai
+  for(let i=1;i<=5;i++){
+    total++;
+    const chosen=document.querySelector(`input[name=tf${i}]:checked`);
+    const right=document.querySelector(`input[name=tf${i}][data-correct]`);
+    document.querySelectorAll(`input[name=tf${i}]`).forEach(x=>x.disabled=true);
+
+    if(!chosen){
+      unanswered++;
+      if(right) right.parentElement?.classList?.add('answer-correct');
+    }else if(right && chosen.value===right.value){
+      correct++;
+      chosen.parentElement?.classList?.add('answer-correct');
+    }else{
+      wrong++;
+      chosen.parentElement?.classList?.add('answer-wrong');
+      if(right) right.parentElement?.classList?.add('answer-correct');
+    }
+  }
+
+  // Điền khuyết
+  document.querySelectorAll('.blank').forEach(inp=>{
+    total++;
+    const value = inp.value.trim();
+    if(!value){
+      unanswered++;
+      inp.classList.add('answer-wrong');
+      inp.title='Đáp án đúng: '+inp.dataset.answer;
+    }else if(norm(value)===norm(inp.dataset.answer)){
+      correct++;
+      inp.classList.add('answer-correct');
+    }else{
+      wrong++;
+      inp.classList.add('answer-wrong');
+      inp.title='Đáp án đúng: '+inp.dataset.answer;
+    }
+    inp.disabled=true;
+  });
+
+  // Nối cột
+  document.querySelectorAll('.match-row select').forEach(sel=>{
+    total++;
+    if(!sel.value){
+      unanswered++;
+      sel.classList.add('answer-wrong');
+    }else if(sel.value===sel.dataset.answer){
+      correct++;
+      sel.classList.add('answer-correct');
+    }else{
+      wrong++;
+      sel.classList.add('answer-wrong');
+    }
+    sel.disabled=true;
+  });
+
+  // Chú thích hình
+  document.querySelectorAll('.diagram-answer').forEach(sel=>{
+    total++;
+    if(!sel.value){
+      unanswered++;
+      sel.classList.add('answer-wrong');
+    }else if(sel.value===sel.dataset.answer){
+      correct++;
+      sel.classList.add('answer-correct');
+    }else{
+      wrong++;
+      sel.classList.add('answer-wrong');
+    }
+    const matchOption = [...sel.options].find(o=>o.value===sel.dataset.answer);
+    if(matchOption) sel.title='Đáp án đúng: '+matchOption.text;
+    sel.disabled=true;
+  });
+
+  // Video + điền khuyết
+  document.querySelectorAll('.video-blank').forEach(inp=>{
+    total++;
+    const value = inp.value.trim();
+    if(!value){
+      unanswered++;
+      inp.classList.add('answer-wrong');
+      inp.title='Đáp án đúng: '+inp.dataset.answer;
+    }else if(norm(value)===norm(inp.dataset.answer)){
+      correct++;
+      inp.classList.add('answer-correct');
+    }else{
+      wrong++;
+      inp.classList.add('answer-wrong');
+      inp.title='Đáp án đúng: '+inp.dataset.answer;
+    }
+    inp.disabled=true;
+  });
+
+  // Kéo – thả khái niệm:
+  // sai bị trả về, nên ô chưa đúng được xem là "chưa làm".
+  document.querySelectorAll('.dropzone[data-accept]').forEach(z=>{
+    total++;
+    if(z.classList.contains('correct')) correct++;
+    else unanswered++;
+  });
+
+  // Kéo – thả hình ảnh: chỉ tính những ô đã có ảnh nhận diện được.
+  document.querySelectorAll('.dropzone[data-image-zone]').forEach(z=>{
+    const item=z.querySelector('.image-drag');
+    if(item && item.dataset.autoScore==='1'){
+      total++;
+      if(item.dataset.imageKey===z.dataset.imageZone) correct++;
+      else wrong++;
+    }
+  });
+
+  const box=document.getElementById('scorebox');
+  const pct=total ? Math.round(correct/total*100) : 0;
+  const scale=(typeof window.quizScale==='number' ? window.quizScale : 10);
+  const scaledScore=total ? Math.round((correct/total)*scale*100)/100 : 0;
+  const msg=pct>=90 ? 'Xuất sắc! 🌟' :
+            pct>=70 ? 'Rất tốt! 👏' :
+            pct>=50 ? 'Khá tốt, em hãy xem lại vài ý nhé.' :
+            'Em hãy đọc lại phần Ghi nhớ và thử lại nhé.';
+
+  box.innerHTML=
+    `<b>Đã chấm bài.</b><br>`+
+    `Điểm: <b>${scaledScore}/${scale}</b> • `+
+    `Đúng: <b>${correct}</b> • Sai: <b>${wrong}</b> • Chưa làm: <b>${unanswered}</b> • Tổng: <b>${total}</b><br>`+
+    `${msg}<br><small>Đáp án đúng được tô xanh; đáp án sai được tô đỏ.</small>`;
+  box.style.display='block';
+
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  btn.textContent='⏳ Đang lưu kết quả...';
+
+  // Gửi đúng cấu trúc Apps Script: A:H
+  const payload={
+    hoTen: studentName,
+    lop: studentClass,
+    diem: scaledScore,
+    soCauDung: correct,
+    soCauSai: wrong,
+    soCauChuaLam: unanswered,
+    tongSoCau: total
+  };
+
+  const sent = await guiKetQuaGoogleSheets(payload);
+  btn.textContent = sent ? '✅ Đã nộp & gửi kết quả' : '⚠️ Đã chấm – chưa gửi được';
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// Giữ tương thích nếu còn lời gọi gradeAll()
+function gradeAll(){ return submitQuiz(); }
+
+// Desktop drag/drop
+let dragged=null;
+document.querySelectorAll('.drag').forEach(el=>{
+  el.addEventListener('dragstart',e=>{
+    if(el.dataset.locked==='1'){e.preventDefault();return;}
+    dragged=el;
+    e.dataTransfer.setData('text/plain',el.id);
+    setTimeout(()=>el.style.opacity='.45',0);
+  });
+  el.addEventListener('dragend',()=>{el.style.opacity='1';dragged=null;});
+});
+
+document.querySelectorAll('.dropzone').forEach(zone=>{
+  zone.addEventListener('dragover',e=>{e.preventDefault(); if(!zone.classList.contains('correct')) zone.classList.add('over');});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault();zone.classList.remove('over');
+    const id=e.dataTransfer.getData('text/plain');
+    const el=document.getElementById(id);
+    if(!el || el.dataset.locked==='1') return;
+    handleDrop(el,zone);
+  });
+});
+
+function handleDrop(el,zone){
+  if(el.dataset.key===zone.dataset.accept){
+    const slot=zone.querySelector('.slot');
+    slot.innerHTML='';
+    slot.appendChild(el);
+    el.setAttribute('draggable','false');
+    el.dataset.locked='1';
+    el.style.cursor='default';
+    zone.classList.add('correct');
+    slot.style.minWidth='170px';
+    checkDragComplete();
+  }else{
+    zone.classList.add('shake');
+    el.classList.add('shake');
+    setTimeout(()=>{zone.classList.remove('shake');el.classList.remove('shake')},300);
+  }
+}
+
+function checkDragComplete(){
+  const zones=[...document.querySelectorAll('.dropzone')];
+  if(zones.every(z=>z.classList.contains('correct'))){
+    document.getElementById('dragSuccess').classList.add('show');
+    confetti();
+  }
+}
+
+// Touch support for phones
+let touchEl=null,ghost=null;
+document.querySelectorAll('.drag').forEach(el=>{
+  el.addEventListener('touchstart',e=>{
+    if(el.dataset.locked==='1') return;
+    touchEl=el;
+    ghost=el.cloneNode(true);
+    ghost.style.position='fixed';ghost.style.zIndex='9999';ghost.style.pointerEvents='none';
+    ghost.style.width=el.getBoundingClientRect().width+'px';
+    ghost.style.opacity='.92';ghost.style.transform='scale(.96)';
+    document.body.appendChild(ghost);
+    moveGhost(e.touches[0]);
+  },{passive:true});
+
+  el.addEventListener('touchmove',e=>{
+    if(!touchEl) return;
+    e.preventDefault();
+    moveGhost(e.touches[0]);
+  },{passive:false});
+
+  el.addEventListener('touchend',e=>{
+    if(!touchEl) return;
+    const t=e.changedTouches[0];
+    if(ghost) ghost.remove();
+    const target=document.elementFromPoint(t.clientX,t.clientY);
+    const zone=target && target.closest('.dropzone');
+    if(zone && !zone.classList.contains('correct')) handleDrop(touchEl,zone);
+    touchEl=null;ghost=null;
+  });
+});
+
+function moveGhost(t){
+  if(!ghost)return;
+  ghost.style.left=(t.clientX-ghost.offsetWidth/2)+'px';
+  ghost.style.top=(t.clientY-25)+'px';
+}
+
+function confetti(){
+  const chars=['🎉','✨','⭐','🎊'];
+  for(let i=0;i<22;i++){
+    const s=document.createElement('span');
+    s.textContent=chars[Math.floor(Math.random()*chars.length)];
+    s.style.position='fixed';s.style.left=(10+Math.random()*80)+'vw';s.style.top='-30px';
+    s.style.fontSize=(18+Math.random()*20)+'px';s.style.zIndex='9999';s.style.pointerEvents='none';
+    s.style.transition=`transform ${1.4+Math.random()}s ease-in, opacity 2s`;
+    document.body.appendChild(s);
+    requestAnimationFrame(()=>{s.style.transform=`translateY(${80+Math.random()*20}vh) rotate(${Math.random()*720}deg)`;s.style.opacity='0';});
+    setTimeout(()=>s.remove(),2200);
+  }
+}
+
+function resetAll(){
+  clearFeedback();
+
+  document.querySelectorAll('input[type=radio]').forEach(x=>{x.checked=false;x.disabled=false});
+  document.querySelectorAll('input[type=text]').forEach(x=>{x.value='';x.disabled=false});
+  document.querySelectorAll('.blank').forEach(x=>{x.disabled=false;x.title='';x.style.borderBottomColor='#8e80ef';x.style.background='#faf9ff'});
+  document.querySelectorAll('.video-blank').forEach(x=>{x.value='';x.disabled=false;x.title='';x.classList.remove('answer-correct','answer-wrong')});
+  document.querySelectorAll('.diagram-answer').forEach(x=>{x.value='';x.disabled=false;x.title='';x.classList.remove('answer-correct','answer-wrong')});
+  if(typeof diagramImageInput !== 'undefined' && diagramImageInput) diagramImageInput.value='';
+  if(typeof diagramImageHolder !== 'undefined' && diagramImageHolder){
+    diagramImageHolder.innerHTML='<div class="hint">Chưa chọn hình ảnh.<br>Hãy chọn ảnh JPG, PNG, WEBP... từ máy tính hoặc điện thoại.</div>';
+  }
+  if(typeof diagramImageUrl !== 'undefined' && diagramImageUrl){
+    URL.revokeObjectURL(diagramImageUrl);
+    diagramImageUrl=null;
+  }
+  if(typeof lessonVideo !== 'undefined'){
+    lessonVideo.pause();
+    lessonVideo.removeAttribute('src');
+    lessonVideo.load();
+    lessonVideo.style.display='none';
+  }
+  if(typeof videoPlaceholder !== 'undefined') videoPlaceholder.style.display='block';
+  if(typeof videoInput !== 'undefined') videoInput.value='';
+  if(typeof lessonVideoUrl !== 'undefined' && lessonVideoUrl){
+    URL.revokeObjectURL(lessonVideoUrl);
+    lessonVideoUrl=null;
+  }
+  document.querySelectorAll('select').forEach(x=>{x.value='';x.disabled=false;x.title='';x.style.borderColor='var(--line)';x.style.background='#fff'});
+  document.querySelectorAll('.q[data-correct]').forEach(q=>{q.style.background='';q.style.paddingLeft='';q.style.paddingRight=''});
+  document.querySelectorAll('.opt').forEach(x=>x.classList.remove('locked-answer'));
+
+  const bank=document.getElementById('dragBank');
+  ['d1','d2','d3','d4','d5'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.dataset.locked='0';el.setAttribute('draggable','true');el.style.cursor='grab';bank.appendChild(el);
+  });
+
+  document.querySelectorAll('.dropzone[data-accept]').forEach(z=>{
+    z.classList.remove('correct','over','shake');
+    const slot=z.querySelector('.slot');slot.textContent='Thả vào đây';slot.style.minWidth='';
+  });
+  document.getElementById('dragSuccess').classList.remove('show');
+
+  // Reset image exercise
+  const imageBank=document.getElementById('imageBank');
+  document.querySelectorAll('.image-drag').forEach(el=>{
+    el.dataset.locked='0';el.setAttribute('draggable','true');el.style.cursor='grab';imageBank.appendChild(el);
+  });
+  document.querySelectorAll('.dropzone[data-image-zone]').forEach(z=>{
+    z.classList.remove('correct','over','shake');
+    const slot=z.querySelector('.slot');slot.textContent='Thả ảnh phù hợp vào đây';
+  });
+  document.getElementById('imageDropMsg').classList.remove('show');
+
+  document.getElementById('scorebox').style.display='none';
+  const sheetStatus=document.getElementById('sheetStatus');
+  if(sheetStatus){sheetStatus.className='sheet-status';sheetStatus.textContent='';}
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=false; btn.textContent='📨 Nộp bài';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+
+
+// ===== External image for diagram annotation =====
+const diagramImageInput = document.getElementById('diagramImageInput');
+const diagramImageHolder = document.getElementById('diagramImageHolder');
+let diagramImageUrl = null;
+
+if(diagramImageInput){
+  diagramImageInput.addEventListener('change', e=>{
+    const file = e.target.files && e.target.files[0];
+    if(!file) return;
+
+    if(diagramImageUrl) URL.revokeObjectURL(diagramImageUrl);
+    diagramImageUrl = URL.createObjectURL(file);
+
+    diagramImageHolder.innerHTML =
+      `<img src="${diagramImageUrl}" alt="Hình bài tập chú thích" style="max-width:100%;max-height:620px;object-fit:contain;border-radius:12px">`;
+  });
+}
+
+// ===== Local video activity =====
+const videoInput = document.getElementById('videoInput');
+const lessonVideo = document.getElementById('lessonVideo');
+const videoPlaceholder = document.getElementById('videoPlaceholder');
+let lessonVideoUrl = null;
+
+videoInput.addEventListener('change', e=>{
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+
+  if(lessonVideoUrl) URL.revokeObjectURL(lessonVideoUrl);
+  lessonVideoUrl = URL.createObjectURL(file);
+
+  lessonVideo.src = lessonVideoUrl;
+  lessonVideo.style.display = 'block';
+  videoPlaceholder.style.display = 'none';
+  lessonVideo.load();
+});
+
+// ===== Uploaded-image drag & drop =====
+function guessImageKey(filename){
+  const f=norm(filename).replace(/\s+/g,'');
+  if(f.includes('plant') || f.includes('thucvat')) return 'plant';
+  if(f.includes('animal') || f.includes('dongvat')) return 'animal';
+  if(f.includes('prokaryote') || f.includes('nhanso') || f.includes('vikhuan')) return 'prokaryote';
+  return '';
+}
+
+document.getElementById('imageInput').addEventListener('change', e=>{
+  const files=[...e.target.files];
+  const preview=document.getElementById('uploadPreview');
+  const bank=document.getElementById('imageBank');
+  preview.innerHTML=''; bank.innerHTML='';
+
+  files.forEach((file,idx)=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const card=document.createElement('div');
+      card.className='upload-card';
+      card.innerHTML=`<img src="${ev.target.result}" alt=""><div class="cap">${file.name}</div>`;
+      preview.appendChild(card);
+
+      const item=document.createElement('div');
+      item.className='drag image-drag';
+      item.draggable=true;
+      item.id='imgdrag_'+idx;
+      item.dataset.imageKey=guessImageKey(file.name);
+      item.dataset.autoScore=item.dataset.imageKey ? '1':'0';
+      item.dataset.locked='0';
+      item.dataset.filename=file.name;
+      item.innerHTML=`<img src="${ev.target.result}" alt="${file.name}" style="width:54px;height:54px;object-fit:cover;border-radius:10px"><span>${file.name}</span>`;
+      bank.appendChild(item);
+      enableImageDrag(item);
+      enableImageTouch(item);
+    };
+    reader.readAsDataURL(file);
+  });
+});
+
+function enableImageDrag(el){
+  el.addEventListener('dragstart',e=>{
+    if(el.dataset.locked==='1'){e.preventDefault();return;}
+    e.dataTransfer.setData('text/plain',el.id);
+    e.dataTransfer.setData('application/x-image-item','1');
+    setTimeout(()=>el.style.opacity='.45',0);
+  });
+  el.addEventListener('dragend',()=>{el.style.opacity='1';});
+}
+
+document.querySelectorAll('.dropzone[data-image-zone]').forEach(zone=>{
+  zone.addEventListener('dragover',e=>{e.preventDefault(); if(!zone.classList.contains('correct')) zone.classList.add('over');});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault(); zone.classList.remove('over');
+    const id=e.dataTransfer.getData('text/plain');
+    const el=document.getElementById(id);
+    if(!el || !el.classList.contains('image-drag') || el.dataset.locked==='1') return;
+    handleImageDrop(el,zone);
+  });
+});
+
+function handleImageDrop(el,zone){
+  const key=el.dataset.imageKey;
+  const hasAuto=el.dataset.autoScore==='1';
+
+  if(hasAuto && key!==zone.dataset.imageZone){
+    zone.classList.add('shake'); el.classList.add('shake');
+    setTimeout(()=>{zone.classList.remove('shake');el.classList.remove('shake')},320);
+    return; // sai => giữ nguyên ở vị trí ban đầu
+  }
+
+  const slot=zone.querySelector('.slot');
+  slot.innerHTML='';
+  slot.appendChild(el);
+  el.dataset.locked='1';
+  el.setAttribute('draggable','false');
+  el.style.cursor='default';
+
+  if(hasAuto){
+    zone.classList.add('correct');
+    const msg=document.getElementById('imageDropMsg');
+    msg.textContent='Chính xác! 🎉';
+    msg.classList.add('show');
+    confetti();
+  }else{
+    const msg=document.getElementById('imageDropMsg');
+    msg.textContent='Đã đặt ảnh vào ô. Ảnh này không có từ khóa trong tên file nên hệ thống không tự xác định đúng/sai.';
+    msg.classList.add('show');
+  }
+}
+
+function enableImageTouch(el){
+  let ghostLocal=null;
+  el.addEventListener('touchstart',e=>{
+    if(el.dataset.locked==='1') return;
+    touchEl=el;
+    ghostLocal=el.cloneNode(true);
+    ghost=ghostLocal;
+    ghost.style.position='fixed';ghost.style.zIndex='9999';ghost.style.pointerEvents='none';
+    ghost.style.width=el.getBoundingClientRect().width+'px';ghost.style.opacity='.92';
+    document.body.appendChild(ghost);
+    moveGhost(e.touches[0]);
+  },{passive:true});
+}
+
+// Extend global touchend for image-drag items
+document.addEventListener('touchend',e=>{
+  if(!touchEl || !touchEl.classList.contains('image-drag')) return;
+  const t=e.changedTouches[0];
+  if(ghost){ghost.remove();ghost=null;}
+  const target=document.elementFromPoint(t.clientX,t.clientY);
+  const zone=target && target.closest('.dropzone[data-image-zone]');
+  if(zone && !zone.classList.contains('correct')) handleImageDrop(touchEl,zone);
+  touchEl=null;
+},{passive:true});
+
+
+// ===== Lesson content: image or file =====
+let lessonFileObjectUrl = null;
+
+function showLessonImage(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const p = document.getElementById('lessonImagePreview');
+    p.innerHTML = `<img src="${ev.target.result}" alt="Nội dung bài học">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showLessonFile(file){
+  if(!file) return;
+  const p = document.getElementById('lessonFilePreview');
+  if(lessonFileObjectUrl) URL.revokeObjectURL(lessonFileObjectUrl);
+  lessonFileObjectUrl = URL.createObjectURL(file);
+  const ext = (file.name.split('.').pop() || '').toLowerCase();
+
+  if(ext === 'pdf' || ext === 'html' || ext === 'htm'){
+    p.innerHTML = `<iframe src="${lessonFileObjectUrl}" title="${file.name}"></iframe>`;
+  } else if(ext === 'txt'){
+    const r = new FileReader();
+    r.onload = e => {
+      const safe = String(e.target.result)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      p.innerHTML = `<pre style="white-space:pre-wrap;width:100%;margin:0;font-family:inherit">${safe}</pre>`;
+    };
+    r.readAsText(file, 'utf-8');
+  } else {
+    p.innerHTML = `<div class="filename">📎 ${file.name}<br><span style="font-size:.85rem;color:#7c879a">Trình duyệt không hiển thị trực tiếp định dạng này. File đã được chọn để dùng kèm bài học.</span></div>`;
+  }
+}
+
+document.getElementById('lessonImageInput').addEventListener('change',e=>showLessonImage(e.target.files[0]));
+document.getElementById('lessonFileInput').addEventListener('change',e=>showLessonFile(e.target.files[0]));
+
+// ===== Admin panel =====
+function openAdminLogin(){
+  document.getElementById('adminPassword').value='';
+  document.getElementById('adminLoginMsg').textContent='';
+  document.getElementById('adminLoginModal').classList.add('show');
+}
+function closeAdminLogin(){document.getElementById('adminLoginModal').classList.remove('show')}
+function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('show')}
+
+function checkAdminPassword(){
+  const pw=document.getElementById('adminPassword').value;
+  if(pw==='1230'){
+    closeAdminLogin();
+    document.getElementById('adminPanelModal').classList.add('show');
+  }else{
+    document.getElementById('adminLoginMsg').textContent='Mật khẩu chưa đúng.';
+  }
+}
+
+function calcConfiguredScore(){
+  const rows=[
+    ['cfgMcCount','cfgMcPoint'],
+    ['cfgTfCount','cfgTfPoint'],
+    ['cfgBlankCount','cfgBlankPoint'],
+    ['cfgMatchCount','cfgMatchPoint'],
+    ['cfgDragCount','cfgDragPoint'],
+    ['cfgDiagramCount','cfgDiagramPoint'],
+    ['cfgVideoCount','cfgVideoPoint']
+  ];
+  return rows.reduce((sum,[c,p])=>{
+    const n=parseFloat(document.getElementById(c).value)||0;
+    const pt=parseFloat(document.getElementById(p).value)||0;
+    return sum+n*pt;
+  },0);
+}
+
+function saveAdminSettings(){
+  const desired=parseFloat(document.getElementById('adminTotalScore').value)||10;
+  const calculated=calcConfiguredScore();
+  const warning=document.getElementById('adminScoreWarning');
+
+  if(Math.abs(calculated-desired)>0.001){
+    warning.textContent=`Lưu ý: tổng điểm theo số câu × điểm/câu hiện là ${calculated}, chưa bằng ${desired}. Hệ thống vẫn lưu nhưng điểm khi nộp bài sẽ quy đổi về thang ${desired}.`;
+  }else{
+    warning.textContent='';
+  }
+
+  const title=document.getElementById('adminLessonTitle').value.trim();
+  if(title){
+    const h1=document.querySelector('.hero h1');
+    h1.textContent=title.toUpperCase();
+    document.title='Phiếu học tập - '+title;
+  }
+
+  const img=document.getElementById('adminLessonImage').files[0];
+  const file=document.getElementById('adminLessonFile').files[0];
+  if(img){
+    showLessonImage(img);
+    const dt=new DataTransfer();dt.items.add(img);document.getElementById('lessonImageInput').files=dt.files;
+  }
+  if(file){
+    showLessonFile(file);
+    const dt=new DataTransfer();dt.items.add(file);document.getElementById('lessonFileInput').files=dt.files;
+  }
+
+  window.quizScale=desired;
+  localStorage.setItem('bio6_quiz_scale',String(desired));
+  localStorage.setItem('bio6_title',title);
+  warning.textContent += (warning.textContent?' ':'')+'Đã lưu cài đặt trên trình duyệt này.';
+}
+
+window.quizScale=parseFloat(localStorage.getItem('bio6_quiz_scale'))||10;
+const savedTitle=localStorage.getItem('bio6_title');
+if(savedTitle){
+  document.querySelector('.hero h1').textContent=savedTitle.toUpperCase();
+  document.title='Phiếu học tập - '+savedTitle;
+}
+
+
+// ===== Robust touch / pointer drag-and-drop for phones and tablets =====
+(function(){
+  let activeEl = null;
+  let ghostEl = null;
+  let originParent = null;
+  let originNext = null;
+  let pointerId = null;
+
+  function isDraggableTarget(el){
+    return el && el.classList &&
+      (el.classList.contains('drag') || el.classList.contains('image-drag')) &&
+      el.dataset.locked !== '1';
+  }
+
+  function makeGhost(el, x, y){
+    const r = el.getBoundingClientRect();
+    const g = el.cloneNode(true);
+    g.classList.add('touch-ghost');
+    g.style.width = r.width + 'px';
+    g.style.left = (x - r.width/2) + 'px';
+    g.style.top = (y - Math.min(30, r.height/2)) + 'px';
+    document.body.appendChild(g);
+    return g;
+  }
+
+  function moveGhost(x, y){
+    if(!ghostEl) return;
+    const r = ghostEl.getBoundingClientRect();
+    ghostEl.style.left = (x - r.width/2) + 'px';
+    ghostEl.style.top = (y - Math.min(30, r.height/2)) + 'px';
+  }
+
+  function clearZoneHighlights(){
+    document.querySelectorAll('.dropzone.touch-over').forEach(z=>z.classList.remove('touch-over'));
+  }
+
+  function zoneUnderPoint(x, y, isImage){
+    const el = document.elementFromPoint(x, y);
+    if(!el) return null;
+    if(isImage){
+      return el.closest('.dropzone[data-image-zone]');
+    }
+    return el.closest('.dropzone[data-accept]');
+  }
+
+  function beginPointerDrag(e){
+    const target = e.target.closest('.drag, .image-drag');
+    if(!isDraggableTarget(target)) return;
+
+    // Mouse is already handled by native drag/drop; use pointer flow only for touch/pen.
+    if(e.pointerType === 'mouse') return;
+
+    activeEl = target;
+    pointerId = e.pointerId;
+    originParent = target.parentNode;
+    originNext = target.nextSibling;
+
+    try{ target.setPointerCapture(pointerId); }catch(_){}
+
+    ghostEl = makeGhost(target, e.clientX, e.clientY);
+    target.style.opacity = '.35';
+    e.preventDefault();
+  }
+
+  function movePointerDrag(e){
+    if(!activeEl || e.pointerId !== pointerId) return;
+    moveGhost(e.clientX, e.clientY);
+    clearZoneHighlights();
+    const isImage = activeEl.classList.contains('image-drag');
+    const zone = zoneUnderPoint(e.clientX, e.clientY, isImage);
+    if(zone && !zone.classList.contains('correct')) zone.classList.add('touch-over');
+    e.preventDefault();
+  }
+
+  function endPointerDrag(e){
+    if(!activeEl || e.pointerId !== pointerId) return;
+
+    const dragged = activeEl;
+    const isImage = dragged.classList.contains('image-drag');
+    const zone = zoneUnderPoint(e.clientX, e.clientY, isImage);
+
+    clearZoneHighlights();
+    if(ghostEl){ ghostEl.remove(); ghostEl = null; }
+    dragged.style.opacity = '1';
+
+    // Use the same existing validation rules as desktop.
+    if(zone && !zone.classList.contains('correct')){
+      if(isImage && typeof handleImageDrop === 'function'){
+        handleImageDrop(dragged, zone);
+      }else if(!isImage && typeof handleDrop === 'function'){
+        handleDrop(dragged, zone);
+      }
+    }else{
+      // No valid target: keep/return the card to its original location.
+      if(dragged.dataset.locked !== '1' && originParent){
+        if(originNext && originNext.parentNode === originParent){
+          originParent.insertBefore(dragged, originNext);
+        }else{
+          originParent.appendChild(dragged);
+        }
+      }
+    }
+
+    try{ dragged.releasePointerCapture(pointerId); }catch(_){}
+    activeEl = null;
+    pointerId = null;
+    originParent = null;
+    originNext = null;
+    e.preventDefault();
+  }
+
+  document.addEventListener('pointerdown', beginPointerDrag, {passive:false});
+  document.addEventListener('pointermove', movePointerDrag, {passive:false});
+  document.addEventListener('pointerup', endPointerDrag, {passive:false});
+  document.addEventListener('pointercancel', endPointerDrag, {passive:false});
+})();
+
+</script>
+
+<div id="adminLoginModal" class="modal-backdrop">
+  <div class="admin-modal" style="max-width:430px">
+    <div class="admin-head">
+      <h2>🔐 Đăng nhập quản trị</h2>
+      <button class="close-btn" onclick="closeAdminLogin()">✕</button>
+    </div>
+    <label>Mật khẩu quản trị</label>
+    <input id="adminPassword" type="password" placeholder="Nhập mật khẩu">
+    <div id="adminLoginMsg" style="margin-top:9px;color:#d94b4b;font-weight:800"></div>
+    <div class="admin-actions">
+      <button class="btn primary" onclick="checkAdminPassword()">Đăng nhập</button>
+    </div>
+  </div>
+</div>
+
+<div id="adminPanelModal" class="modal-backdrop">
+  <div class="admin-modal">
+    <div class="admin-head">
+      <h2>⚙️ Cài đặt phiếu học tập</h2>
+      <button class="close-btn" onclick="closeAdminPanel()">✕</button>
+    </div>
+
+    <div class="admin-grid">
+      <div class="admin-field">
+        <label>Tên bài học</label>
+        <input id="adminLessonTitle" type="text" value="Bài 19: Cấu tạo và chức năng các thành phần của tế bào">
+      </div>
+      <div class="admin-field">
+        <label>Tổng điểm</label>
+        <input id="adminTotalScore" type="number" min="1" max="100" step="0.5" value="10">
+      </div>
+    </div>
+
+    <table class="admin-table">
+      <thead>
+        <tr><th>Dạng câu hỏi</th><th>Số câu</th><th>Điểm/câu</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Trắc nghiệm</td><td><input id="cfgMcCount" type="number" min="0" value="4"></td><td><input id="cfgMcPoint" type="number" min="0" step="0.25" value="0.5"></td></tr>
+        <tr><td>Đúng – Sai</td><td><input id="cfgTfCount" type="number" min="0" value="5"></td><td><input id="cfgTfPoint" type="number" min="0" step="0.25" value="0.5"></td></tr>
+        <tr><td>Điền khuyết</td><td><input id="cfgBlankCount" type="number" min="0" value="5"></td><td><input id="cfgBlankPoint" type="number" min="0" step="0.25" value="0.5"></td></tr>
+        <tr><td>Nối cột</td><td><input id="cfgMatchCount" type="number" min="0" value="6"></td><td><input id="cfgMatchPoint" type="number" min="0" step="0.25" value="0.5"></td></tr>
+        <tr><td>Kéo – thả</td><td><input id="cfgDragCount" type="number" min="0" value="5"></td><td><input id="cfgDragPoint" type="number" min="0" step="0.25" value="0.5"></td></tr>
+        <tr><td>Chú thích hình</td><td><input id="cfgDiagramCount" type="number" min="0" value="9"></td><td><input id="cfgDiagramPoint" type="number" min="0" step="0.25" value="0.5"></td></tr>
+        <tr><td>Video + điền khuyết</td><td><input id="cfgVideoCount" type="number" min="0" value="5"></td><td><input id="cfgVideoPoint" type="number" min="0" step="0.25" value="0.5"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="admin-field" style="margin-top:14px">
+      <label>Nội dung bài học</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div>
+          <div style="font-weight:800;margin-bottom:5px">Hình ảnh</div>
+          <input id="adminLessonImage" type="file" accept="image/*">
+        </div>
+        <div>
+          <div style="font-weight:800;margin-bottom:5px">File</div>
+          <input id="adminLessonFile" type="file" accept=".pdf,.txt,.doc,.docx,.ppt,.pptx,.html,.htm">
+        </div>
+      </div>
+    </div>
+
+    <div id="adminScoreWarning" style="margin-top:10px;color:#d94b4b;font-weight:850"></div>
+
+    <div class="admin-actions">
+      <button class="btn primary" onclick="saveAdminSettings()">💾 Lưu cài đặt</button>
+      <button class="btn secondary" onclick="closeAdminPanel()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
